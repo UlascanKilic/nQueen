@@ -1,6 +1,3 @@
-/* C/C++ program to solve N Queen Problem using 
-   backtracking */
-
 #include <stdbool.h> 
 #include <time.h>
 #include <windows.h>
@@ -21,33 +18,33 @@ void rengim(int renk){ //renk fonksiyonum{
 	hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hStdout, renk);
 }
-//Bulunan çözümü yazdıran fonksiyon
+//Bulunan Ã§Ã¶zÃ¼mÃ¼ yazdÄ±ran fonksiyon
 void CozumYazdir(int tahta[N][N],int renk) 
 { 
 	int i,j,k=0,sayac=1;
 
     for (i = 0; i < N; i++) { 
         for (j = 0; j < N; j++){
-        	if(tahta[i][j]==1) //tahta üzerindeki 1 olan, yani üzerinde vezir olan kısımları kontrol ediyorum
+        	if(tahta[i][j]==1) //tahta Ã¼zerindeki 1 olan, yani Ã¼zerinde vezir olan kÄ±sÄ±mlarÄ± kontrol ediyorum
         	{	if(renk>15)
 				{
         			renk= renk-14;
 				}	
         		rengim(renk);
-        		_setmode(_fileno(stdout), _O_U16TEXT); //ASCII karakter yazdırmak için yazı modunu değiştiriyorum
+        		_setmode(_fileno(stdout), _O_U16TEXT); //ASCII karakter yazdÄ±rmak iÃ§in yazÄ± modunu deÄŸiÅŸtiriyorum
 				wprintf(L"\x2588\x2588");    		
         	 	sayac++;    	 
 			} 				
 			else
 			{				
-				if(sayac%2==1) rengim(15); //	açık renk
+				if(sayac%2==1) rengim(15); //	aÃ§Ä±k renk
 				else rengim(0); // koyu renk
 				
-				_setmode(_fileno(stdout), _O_U16TEXT); //ASCII karakter yazdırmak için yazı modunu değiştiriyorum
+				_setmode(_fileno(stdout), _O_U16TEXT); //ASCII karakter yazdÄ±rmak iÃ§in yazÄ± modunu deÄŸiÅŸtiriyorum
 					wprintf(L"\x2588\x2588");			
 			 	sayac++;
 			}		
-				_setmode(_fileno(stdout), _O_TEXT);	  //ASCII karakter yazdırdıktan sonra yazı modunu normale çeviriyorum
+				_setmode(_fileno(stdout), _O_TEXT);	  //ASCII karakter yazdÄ±rdÄ±ktan sonra yazÄ± modunu normale Ã§eviriyorum
 		}
 		if(i%2==1){
 			sayac = 1;
@@ -61,24 +58,24 @@ void CozumYazdir(int tahta[N][N],int renk)
      printf("\n"); 
 } 
    
-/* Vezirin o an için belirlenen tahtanın ilgili satır ve sütununa koyulup, koyulamayacağını
-   	kontrol eden fonksiyon. Sadece sol,sol üst diyagonal ve sol alt diyagonali kontrol ediyorum.
-   	Çünkü vezirlerimi yerleştirirken soldan sağa doğru gidiyorum ve son vezire kadar sağ taraf
-   	her zaman boş kalacağı için sağ taraftan bir tehdit gelmiyor. Dolayısı ile sadece sol tarafı
+/* Vezirin o an iÃ§in belirlenen tahtanÄ±n ilgili satÄ±r ve sÃ¼tununa koyulup, koyulamayacaÄŸÄ±nÄ±
+   	kontrol eden fonksiyon. Sadece sol,sol Ã¼st diyagonal ve sol alt diyagonali kontrol ediyorum.
+   	Ã‡Ã¼nkÃ¼ vezirlerimi yerleÅŸtirirken soldan saÄŸa doÄŸru gidiyorum ve son vezire kadar saÄŸ taraf
+   	her zaman boÅŸ kalacaÄŸÄ± iÃ§in saÄŸ taraftan bir tehdit gelmiyor. DolayÄ±sÄ± ile sadece sol tarafÄ±
    	kontrol etmem yeterli oluyor.
-   	Eğer kontrol edilen karelerin birisinden 1 değeri dönerse if koşulum sağlanmış oluyor ve 
-   	o kontrol edilen kare için vezir tehdit edilmiş olacağından false döndürerek güvenli olmadığını
-   	söylüyorum.
+   	EÄŸer kontrol edilen karelerin birisinden 1 deÄŸeri dÃ¶nerse if koÅŸulum saÄŸlanmÄ±ÅŸ oluyor ve 
+   	o kontrol edilen kare iÃ§in vezir tehdit edilmiÅŸ olacaÄŸÄ±ndan false dÃ¶ndÃ¼rerek gÃ¼venli olmadÄ±ÄŸÄ±nÄ±
+   	sÃ¶ylÃ¼yorum.
 */
 bool guvenliMi(int tahta[N][N], int row, int col) 
 { 
     int i, j;  
-    /* Sol satırı kontrol ediyorum */
+    /* Sol satÄ±rÄ± kontrol ediyorum */
     for (i = 0; i < col; i++) 
         if (tahta[row][i]) 
             return false; 
   
-    /* Sol üst diyagonali kontrol ediyorum*/
+    /* Sol Ã¼st diyagonali kontrol ediyorum*/
     for (i = row, j = col; i >= 0 && j >= 0; i--, j--) 
         if (tahta[i][j]) 
             return false; 
@@ -91,63 +88,63 @@ bool guvenliMi(int tahta[N][N], int row, int col)
     return true; 
 } 
   
-/* Problemimi çözdüğüm recursive fonksiyonum*/
+/* Problemimi Ã§Ã¶zdÃ¼ÄŸÃ¼m recursive fonksiyonum*/
 bool nQueen(int tahta[N][N], int col) 
 { 
 	int i;
-    /* Bütün vezirlerim tahtaya yerleştiyse true döndürüyorum */
+    /* BÃ¼tÃ¼n vezirlerim tahtaya yerleÅŸtiyse true dÃ¶ndÃ¼rÃ¼yorum */
     if (col >= N) 
         return true; 
   
-    /* Seçtiğim sütunun güvenli olan satırına vezirimi koymak için kurduğum döngü*/
+    /* SeÃ§tiÄŸim sÃ¼tunun gÃ¼venli olan satÄ±rÄ±na vezirimi koymak iÃ§in kurduÄŸum dÃ¶ngÃ¼*/
     for (i = 0; i < N; i++) { 
-        /* tahta[i][col] güvenli mi diye kontrol ediyorum */
+        /* tahta[i][col] gÃ¼venli mi diye kontrol ediyorum */
         if (guvenliMi(tahta, i, col)) { 
-            /* Güvenli ise tahta[i][col] 'u 1 yaparak vezirimi oraya yerleştiriyorum */
+            /* GÃ¼venli ise tahta[i][col] 'u 1 yaparak vezirimi oraya yerleÅŸtiriyorum */
             tahta[i][col] = 1;          
-            /* Aynı tahtanın geri kalan sütunlarına diğer vezirleri koymak için recursive olarak kendisini çağırttırıyorum*/
+            /* AynÄ± tahtanÄ±n geri kalan sÃ¼tunlarÄ±na diÄŸer vezirleri koymak iÃ§in recursive olarak kendisini Ã§aÄŸÄ±rttÄ±rÄ±yorum*/
             if (nQueen(tahta, col + 1)) 
                 return true; 
           
-            /* Eğer tahta[i][col] üzerine yerleştirilen vezir ile
-			   bir çözüme varamıyorsam ilgili veziri oradan kaldırıyorum
-			   Örn:  V * * *
+            /* EÄŸer tahta[i][col] Ã¼zerine yerleÅŸtirilen vezir ile
+			   bir Ã§Ã¶zÃ¼me varamÄ±yorsam ilgili veziri oradan kaldÄ±rÄ±yorum
+			   Ã–rn:  V * * *
 			   	     * * * *
 			   	     * V * *
-			   	     * * * *  4x4 satranç tahtası için 3. vezirin 3. sütuna koyulabileceği bir yer yok.
-			   	     	      Bu yüzden 2. veziri oradan kaldırıyorum.
+			   	     * * * *  4x4 satranÃ§ tahtasÄ± iÃ§in 3. vezirin 3. sÃ¼tuna koyulabileceÄŸi bir yer yok.
+			   	     	      Bu yÃ¼zden 2. veziri oradan kaldÄ±rÄ±yorum.
 			*/ 
             tahta[i][col] = 0; // BACKTRACK 
         } 
     }    
-    /* Vezirim ilgili sütunun hiçbir satırına koyulamıyorsa, false döndürüyorum */ 
+    /* Vezirim ilgili sÃ¼tunun hiÃ§bir satÄ±rÄ±na koyulamÄ±yorsa, false dÃ¶ndÃ¼rÃ¼yorum */ 
     return false; 
 } 
   
 
-/*	Backtrackinh kullanarak problemi çözdüğüm fonksiyon.
-	Problemi çözmek için nQueen fonkisyonundan faydalanıyor.
-	Vezirler yerleştirilemez ise false döndürüyor, 
-	vezirler yerleştirilir ise true döndürüp çözümü yazdırıyor.
+/*	Backtrackinh kullanarak problemi Ã§Ã¶zdÃ¼ÄŸÃ¼m fonksiyon.
+	Problemi Ã§Ã¶zmek iÃ§in nQueen fonkisyonundan faydalanÄ±yor.
+	Vezirler yerleÅŸtirilemez ise false dÃ¶ndÃ¼rÃ¼yor, 
+	vezirler yerleÅŸtirilir ise true dÃ¶ndÃ¼rÃ¼p Ã§Ã¶zÃ¼mÃ¼ yazdÄ±rÄ±yor.
 */
 bool nCoz(int renk) 
 { 
     int tahta[N][N];
     int i,j;
     
-    for(i=0;i<N;i++){ // Oluşturduğum tahtanın bütün satır ve sütunlarına 0 değeri atıyorum (0 - Boş, 1 - Vezir var)
+    for(i=0;i<N;i++){ // OluÅŸturduÄŸum tahtanÄ±n bÃ¼tÃ¼n satÄ±r ve sÃ¼tunlarÄ±na 0 deÄŸeri atÄ±yorum (0 - BoÅŸ, 1 - Vezir var)
     	for(j=0;j<N;j++){
     		tahta[i][j] = 0;
 		}
 	}
-	/* Oluşturduğum tahtanın ilk sütunundan başlamak üzere vezirleri koymaya başlamasını istiyorum
-	    eğer false dönerse çözüm yok demektir.*/
+	/* OluÅŸturduÄŸum tahtanÄ±n ilk sÃ¼tunundan baÅŸlamak Ã¼zere vezirleri koymaya baÅŸlamasÄ±nÄ± istiyorum
+	    eÄŸer false dÃ¶nerse Ã§Ã¶zÃ¼m yok demektir.*/
     if (nQueen(tahta, 0) == false) { 
         printf("Cozum bulunamadi."); 
         return false; 
     } 
   
-    CozumYazdir(tahta,renk); // Bulduğum çözümü yazdırıyorum
+    CozumYazdir(tahta,renk); // BulduÄŸum Ã§Ã¶zÃ¼mÃ¼ yazdÄ±rÄ±yorum
     return true; 
 } 
 void HistogramZaman(double dizi[M][2]){	    
@@ -161,7 +158,7 @@ void HistogramZaman(double dizi[M][2]){
        		renk = i+1;
        		if(i+1>15)
        		{
-       			renk = renk-14;	// Sadece 0-15 arasında renk değerleri kullanabildiğim için başa sarıyorum.
+       			renk = renk-14;	// Sadece 0-15 arasÄ±nda renk deÄŸerleri kullanabildiÄŸim iÃ§in baÅŸa sarÄ±yorum.
 			}		
        		rengim(renk);
        		if(dizi[i][0] != 0)
@@ -194,7 +191,7 @@ void HistogramBellek(int dizi[]){
        		renk = i+1;
        		if(i+1>15)
        		{
-       			renk = renk-14;	// Sadece 0-15 arasında renk değerleri kullanabildiğim için başa sarıyorum.
+       			renk = renk-14;	// Sadece 0-15 arasÄ±nda renk deÄŸerleri kullanabildiÄŸim iÃ§in baÅŸa sarÄ±yorum.
 			}		
        		rengim(renk);
        		
@@ -228,7 +225,7 @@ void Iterasyon(int max, int min, int tekrar ,double dizi[M][2]){
 	
 	for(i=0;i<tekrar;i++){
 		renk = i+1;
-		N=(rand()%(max-min)+1)+min; //Verilen max-min arasında rastgele bir N değeri üretiyorum.	
+		N=(rand()%(max-min)+1)+min; //Verilen max-min arasÄ±nda rastgele bir N deÄŸeri Ã¼retiyorum.	
 		nDegerleri[i] = N;
 		if(renk>15)
 			renk = renk-14;		
@@ -246,7 +243,7 @@ void Iterasyon(int max, int min, int tekrar ,double dizi[M][2]){
 		
 		end = clock();
 		time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-		if(N<=19){ //Histogram için verilerimi dizime depoluyorum
+		if(N<=19){ //Histogram iÃ§in verilerimi dizime depoluyorum
 		
 			dizi[k][0] = N;
 			dizi[k][1] = time_spent;
@@ -273,15 +270,15 @@ void Iterasyon(int max, int min, int tekrar ,double dizi[M][2]){
 }
 
 int main() 
-{ 	/*  N değeri için 4-19 arasında birbirine yakın ve düşük sürelerde çözülüyor.
-		20-29 arasında ise 4-19 a göre çözüm çok daha uzun sürüyor. 
-		Grafikte ekrandan taşma gibi durumları önlemek için
-		4-19 arasını kendi arasında hesaplayıp bir grafikte,
-		20-29 arasını kendi arasında hesaplayıp başka bir grafikte gösteriyorum*/ 
+{ 	/*  N deÄŸeri iÃ§in 4-19 arasÄ±nda birbirine yakÄ±n ve dÃ¼ÅŸÃ¼k sÃ¼relerde Ã§Ã¶zÃ¼lÃ¼yor.
+		20-29 arasÄ±nda ise 4-19 a gÃ¶re Ã§Ã¶zÃ¼m Ã§ok daha uzun sÃ¼rÃ¼yor. 
+		Grafikte ekrandan taÅŸma gibi durumlarÄ± Ã¶nlemek iÃ§in
+		4-19 arasÄ±nÄ± kendi arasÄ±nda hesaplayÄ±p bir grafikte,
+		20-29 arasÄ±nÄ± kendi arasÄ±nda hesaplayÄ±p baÅŸka bir grafikte gÃ¶steriyorum*/ 
 		
-	//Grafiği taşmadan görmek için cmd ekranının tam ekran yapılmasını öneriyorum.
+	//GrafiÄŸi taÅŸmadan gÃ¶rmek iÃ§in cmd ekranÄ±nÄ±n tam ekran yapÄ±lmasÄ±nÄ± Ã¶neriyorum.
 		
-	Iterasyon(19,4,28,ilkArray); // (Max N değeri,Min N değeri,tekrar sayısı,grafik için verilerin depolanacağı dizi)
+	Iterasyon(19,4,28,ilkArray); // (Max N deÄŸeri,Min N deÄŸeri,tekrar sayÄ±sÄ±,grafik iÃ§in verilerin depolanacaÄŸÄ± dizi)
 	Iterasyon(29,20,5,ikinciArray);
 	printf("\n");
 	
