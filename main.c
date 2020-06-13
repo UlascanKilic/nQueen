@@ -108,7 +108,7 @@ bool nQueen(int tahta[N][N], int col)
           
             /* Eğer tahta[i][col] üzerine yerleştirilen vezir ile
 			   bir çözüme varamıyorsam ilgili veziri oradan kaldırıyorum
-			   Örn:  V * * *
+			   Örn:      V * * *
 			   	     * * * *
 			   	     * V * *
 			   	     * * * *  4x4 satranç tahtası için 3. vezirin 3. sütuna koyulabileceği bir yer yok.
